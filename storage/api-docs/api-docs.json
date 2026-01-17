@@ -1,0 +1,689 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Sim",
+        "description": "Сервис для сим-карт",
+        "version": "1"
+    },
+    "paths": {
+        "/contract": {
+            "get": {
+                "tags": [
+                    "contract"
+                ],
+                "summary": "Получение списка контрактов",
+                "description": "Получение списка контрактов",
+                "operationId": "26defba93f4b9ef293dcec15e2c7397e",
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "user_id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "34"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "format": "string",
+                                                        "example": "Описание контракта"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "TIMESTAMP",
+                                                        "example": "2025-06-21T12:56:45.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "TIMESTAMP",
+                                                        "example": "2025-06-21T12:56:45.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "meta": {
+                                            "$ref": "#/components/schemas/Paginator"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "contract"
+                ],
+                "summary": "Создание контракта",
+                "description": "Создание контракта",
+                "operationId": "3ac31f0bee636186501c3186cef45de3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "Oleg@mail.ru"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "23455"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "format": "int",
+                                                    "example": "1"
+                                                },
+                                                "user_id": {
+                                                    "type": "integer",
+                                                    "format": "int",
+                                                    "example": "34"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "format": "string",
+                                                    "example": "Описание контракта"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "TIMESTAMP",
+                                                    "example": "2025-06-21T12:56:45.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "TIMESTAMP",
+                                                    "example": "2025-06-21T12:56:45.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Ошибка"
+                    }
+                }
+            }
+        },
+        "/sim": {
+            "get": {
+                "tags": [
+                    "sim"
+                ],
+                "summary": "Получение списка сим-карт",
+                "description": "Получение списка сим-карт",
+                "operationId": "871f5cb73074b3cc877ae6e1fd03212a",
+                "parameters": [
+                    {
+                        "parameter": "groups_id",
+                        "name": "groups_id",
+                        "in": "query",
+                        "description": "json с идентификаторами групп",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    },
+                    {
+                        "parameter": "contracts_id",
+                        "name": "contracts_id",
+                        "in": "query",
+                        "description": "json с идентификаторами контрактов",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    },
+                    {
+                        "parameter": "phones",
+                        "name": "phones",
+                        "in": "query",
+                        "description": "json с номерами телефонов",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "contract_id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "34"
+                                                    },
+                                                    "phone": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "9273610640"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "format": "string",
+                                                        "example": "Любое название сим карты"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "TIMESTAMP",
+                                                        "example": "2025-06-21T12:56:45.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "TIMESTAMP",
+                                                        "example": "2025-06-21T12:56:45.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "meta": {
+                                            "$ref": "#/components/schemas/Paginator"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/signup": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Регистрагия пользователя",
+                "description": "Регистрагия пользователя",
+                "operationId": "b02b6f53e2dba31bd172672d7aba3c61",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "Oleg"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "Oleg@mail.ru"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "23455"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "token": {
+                                                        "type": "string",
+                                                        "format": "JWT",
+                                                        "example": "Fk32aopIeVO5KKgVu27FYwQMwE3"
+                                                    },
+                                                    "user": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "format": "int",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "format": "name",
+                                                                "example": "Oleg"
+                                                            },
+                                                            "email": {
+                                                                "type": "string",
+                                                                "format": "email",
+                                                                "example": "Oleg@mail.ru"
+                                                            },
+                                                            "email_verified_at": {
+                                                                "type": "string",
+                                                                "format": "TIMESTAMP",
+                                                                "example": "2025-06-21T12:56:45.000000Z"
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "TIMESTAMP",
+                                                                "example": "2025-06-21T12:56:45.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "TIMESTAMP",
+                                                                "example": "2025-06-21T12:56:45.000000Z"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/signin": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Получение токена пользователя",
+                "description": "Получение токена пользователя",
+                "operationId": "23b13cdd0d295532d41700d9456412ee",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "Oleg@mail.ru"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "23455"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "token": {
+                                                        "type": "string",
+                                                        "format": "JWT",
+                                                        "example": "Fk32aopIeVO5KKgVu27FYwQMwE3"
+                                                    },
+                                                    "user": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "format": "int",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "format": "name",
+                                                                "example": "Oleg"
+                                                            },
+                                                            "email": {
+                                                                "type": "string",
+                                                                "format": "email",
+                                                                "example": "Oleg@mail.ru"
+                                                            },
+                                                            "email_verified_at": {
+                                                                "type": "string",
+                                                                "format": "TIMESTAMP",
+                                                                "example": "2025-06-21T12:56:45.000000Z"
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "TIMESTAMP",
+                                                                "example": "2025-06-21T12:56:45.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "TIMESTAMP",
+                                                                "example": "2025-06-21T12:56:45.000000Z"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Ошибка"
+                    }
+                }
+            }
+        },
+        "/user": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Поиск пользователя по имени",
+                "description": "Поиск пользователя по имени",
+                "operationId": "75367f83cec4b70f9f8c92fe2968d784",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "Oleg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "paginator": {
+                                            "$ref": "#/components/schemas/Paginator"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "format": "name",
+                                                        "example": "Oleg"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "format": "email",
+                                                        "example": "Oleg@mail.ru"
+                                                    },
+                                                    "email_verified_at": {
+                                                        "type": "string",
+                                                        "format": "TIMESTAMP",
+                                                        "example": "2025-06-21T12:56:45.000000Z"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "TIMESTAMP",
+                                                        "example": "2025-06-21T12:56:45.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "TIMESTAMP",
+                                                        "example": "2025-06-21T12:56:45.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Ошибка"
+                    }
+                }
+            }
+        },
+        "/user/current": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Получение данных текущего пользователя",
+                "description": "Получение данных текущего пользователя",
+                "operationId": "2c220e4ea23b7503b8c712333d5f9764",
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "format": "int",
+                                                    "example": "1"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "format": "name",
+                                                    "example": "Oleg"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "format": "email",
+                                                    "example": "Oleg@mail.ru"
+                                                },
+                                                "email_verified_at": {
+                                                    "type": "string",
+                                                    "format": "TIMESTAMP",
+                                                    "example": "2025-06-21T12:56:45.000000Z"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "TIMESTAMP",
+                                                    "example": "2025-06-21T12:56:45.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "TIMESTAMP",
+                                                    "example": "2025-06-21T12:56:45.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/logout": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Сброс аутентификации",
+                "description": "Сброс аутентификации",
+                "operationId": "cce085db2ff11bc8ec318179f53f3395",
+                "responses": {
+                    "200": {
+                        "description": "Успешно"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Paginator": {
+                "properties": {
+                    "current_page": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "1"
+                    },
+                    "first_page_url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "http://138.124.55.208/api/sim?page=1"
+                    },
+                    "from": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "1"
+                    },
+                    "last_page": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "380"
+                    },
+                    "last_page_url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "http://138.124.55.208/api/sim?page=5"
+                    },
+                    "next_page_url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "http://138.124.55.208/api/sim?page=3"
+                    },
+                    "path": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "http://138.124.55.208/api/sim?page=2"
+                    },
+                    "per_page": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "30"
+                    },
+                    "to": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "30"
+                    },
+                    "total": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "11371"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "contract",
+            "description": "contract"
+        },
+        {
+            "name": "sim",
+            "description": "sim"
+        },
+        {
+            "name": "user",
+            "description": "user"
+        }
+    ]
+}

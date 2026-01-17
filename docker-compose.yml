@@ -1,0 +1,68 @@
+services:
+  sim:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sim
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: sim
+      SERVICE_TAGS: dev
+    working_dir: /var/www/sim
+    depends_on:
+      - db
+    volumes: 
+      - .:/var/www/sim
+    ports:
+      - 9000:9000
+    networks:
+      - sim-net
+
+  sim_webserver:
+    image: nginx:alpine
+    container_name: sim_webserver
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - sim
+    ports:
+      - 80:80
+    volumes:
+      - .:/var/www/sim
+      - ./nginx:/etc/nginx/conf.d
+    networks:
+      - sim-net
+
+  db:
+    image: mariadb:10.11
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: SkvOl9
+    container_name: db
+    ports:
+      - 3306:3306
+    networks:
+      sim-net:
+        ipv4_address: 172.25.0.3
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    container_name: phpmyadmin
+    depends_on:
+      - db
+    ports:
+      - 81:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - sim-net
+
+networks:
+  sim-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+          gateway: 172.25.0.1
