@@ -30,16 +30,6 @@
                                                         "format": "int",
                                                         "example": "1"
                                                     },
-                                                    "user_id": {
-                                                        "type": "integer",
-                                                        "format": "int",
-                                                        "example": "34"
-                                                    },
-                                                    "description": {
-                                                        "type": "string",
-                                                        "format": "string",
-                                                        "example": "Описание контракта"
-                                                    },
                                                     "created_at": {
                                                         "type": "string",
                                                         "format": "TIMESTAMP",
@@ -78,15 +68,15 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "email": {
-                                        "type": "string",
-                                        "format": "email",
-                                        "example": "Oleg@mail.ru"
+                                    "user_id": {
+                                        "type": "integer",
+                                        "format": "int",
+                                        "example": "Идентификатор пользователя"
                                     },
-                                    "password": {
+                                    "description": {
                                         "type": "string",
-                                        "format": "password",
-                                        "example": "23455"
+                                        "format": "string",
+                                        "example": "Описание контракта"
                                     }
                                 },
                                 "type": "object"
@@ -107,11 +97,6 @@
                                                     "type": "integer",
                                                     "format": "int",
                                                     "example": "1"
-                                                },
-                                                "user_id": {
-                                                    "type": "integer",
-                                                    "format": "int",
-                                                    "example": "34"
                                                 },
                                                 "description": {
                                                     "type": "string",

@@ -24,8 +24,6 @@ class ContractController extends Controller{
                     new OAT\Property(property: 'data', type: 'array', items: new OAT\Items(
                         properties: [
                             new OAT\Property(property: 'id', type: 'int', format: 'int', example: '1'),
-                            new OAT\Property(property: 'user_id', type: 'int', format: 'int', example: '34'),
-                            new OAT\Property(property: 'description', type: 'string', format: 'string', example: 'Описание контракта'),
                             new OAT\Property(property: 'created_at', type: 'string', format: 'TIMESTAMP', example: '2025-06-21T12:56:45.000000Z'),
                             new OAT\Property(property: 'updated_at', type: 'string', format: 'TIMESTAMP', example: '2025-06-21T12:56:45.000000Z'),
                         ]
@@ -53,7 +51,6 @@ class ContractController extends Controller{
                 content: new OAT\JsonContent(properties: [
                     new OAT\Property(property: 'data', type: 'object', properties: [
                             new OAT\Property(property: 'id', type: 'int', format: 'int', example: '1'),
-                            new OAT\Property(property: 'user_id', type: 'int', format: 'int', example: '34'),
                             new OAT\Property(property: 'description', type: 'string', format: 'string', example: 'Описание контракта'),
                             new OAT\Property(property: 'created_at', type: 'string', format: 'TIMESTAMP', example: '2025-06-21T12:56:45.000000Z'),
                             new OAT\Property(property: 'updated_at', type: 'string', format: 'TIMESTAMP', example: '2025-06-21T12:56:45.000000Z'),
@@ -69,16 +66,18 @@ class ContractController extends Controller{
         parameters: [new OAT\RequestBody(
             required: true,
             content: new OAT\JsonContent(properties: [
-                new OAT\Property(property: 'email', type: 'string', format: 'email', example: 'Oleg@mail.ru'),
-                new OAT\Property(property: 'password', type: 'string', format: 'password', example: '23455'),
+                new OAT\Property(property: 'user_id', type: 'int', format: 'int', example: 'Идентификатор пользователя'),
+                new OAT\Property(property: 'description', type: 'string', format: 'string', example: 'Описание контракта'),
             ])
         )]
     )]
     public function create(PostRequest $request){
         $contract = new Contract;
 
-        $contract->fill($request->only(['user_id', 'description']));
+        $contract->fill($request->only(['description']));
         $contract->save();
+
+        $contract->users()->attach($request->user_id);
 
         return self::response($contract->toArray());
     }

@@ -39,7 +39,7 @@ class Sim extends Model
      */
     public function scopeCurrent(Builder $query, int $user_id)
     {
-        return $query->whereHas('contract.user', fn ($q) => $q->where('user_id', $user_id));
+        return $query->whereHas('contract.users', fn ($q) => $q->where('user_id', $user_id));
     }
 
     /**

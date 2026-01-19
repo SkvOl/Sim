@@ -53,7 +53,7 @@ class User extends Authenticatable
     /**
      * Связь с таблицей контрактов
      */
-    public function contract(): BelongsToMany
+    public function contracts(): BelongsToMany
     {
         return $this->belongsToMany(Contract::class);
     }

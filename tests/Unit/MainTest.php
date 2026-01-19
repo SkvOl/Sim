@@ -51,7 +51,7 @@ class MainTest extends TestCase{
         ]);
         $response->assertStatus(200)->assertJsonStructure([
             'data'=>[
-                'user_id', 'description', 'created_at', 'id',
+                'description', 'created_at', 'id',
             ]
         ]);
     }
@@ -66,7 +66,7 @@ class MainTest extends TestCase{
         $response = $this->getJson('/api/v1/contract', []);
         $response->assertStatus(200)->assertJsonStructure([
             'data'=>[
-                [  'user_id', 'description', 'created_at', 'id', ]
+                [ 'description', 'created_at', 'id', ]
             ]
         ]);
     }

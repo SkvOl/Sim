@@ -27,7 +27,7 @@ class Contract extends Model
     /**
      * Связь с таблицей пользователей
      */
-    public function user(): BelongsToMany
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
     }
