@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -52,8 +53,8 @@ class User extends Authenticatable
     /**
      * Связь с таблицей контрактов
      */
-    public function contract(): HasOne
+    public function contract(): BelongsToMany
     {
-        return $this->hasOne(Contract::class);
+        return $this->belongsToMany(Contract::class);
     }
 }

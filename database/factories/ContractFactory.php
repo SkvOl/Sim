@@ -17,7 +17,6 @@ class ContractFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => fake()->numberBetween(1, 1000),
             'description' => fake()->sentence(5),
         ];
     }

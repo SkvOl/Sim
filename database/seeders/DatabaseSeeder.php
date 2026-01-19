@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
         ->has(Sim::factory()->count(5), 'sim')
         ->create();
 
-        User::factory(1000)
-        ->has(Contract::factory()->count(1), 'contract')
+        Contract::factory(1000)
+        ->has(User::factory()->count(3), 'user')
         ->create();        
     }
 }
