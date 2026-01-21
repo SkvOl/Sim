@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         ->create();
 
         Contract::factory(1000)
-        ->has(User::factory()->count(3), 'user')
+        ->has(User::factory()->count(3), 'users')
         ->create();        
     }
 }

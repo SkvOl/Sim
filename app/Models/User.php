@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Contract;
@@ -53,8 +54,8 @@ class User extends Authenticatable
     /**
      * Связь с таблицей контрактов
      */
-    public function contracts(): BelongsToMany
+    public function contracts(): BelongsTo
     {
-        return $this->belongsToMany(Contract::class);
+        return $this->belongsTo(Contract::class);
     }
 }

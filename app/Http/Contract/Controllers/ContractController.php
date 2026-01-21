@@ -8,6 +8,7 @@ use OpenApi\Attributes as OAT;
 use Illuminate\Http\Request;
 use App\Http\Controller;
 use App\Models\Contract;
+use App\Models\User;
 
 class ContractController extends Controller{
     
@@ -77,7 +78,15 @@ class ContractController extends Controller{
         $contract->fill($request->only(['description']));
         $contract->save();
 
-        $contract->users()->attach($request->user_id);
+        // Если нельзя привязывать пользователей к новым контрактам
+        // $user = User::find($request->user_id);
+        // if(!$user OR isset($user->contract_id)){
+        //     throw new \Exception('User has contract', 400);    
+        // }
+        
+        User::where('id', $request->user_id)->update([
+            'contract_id' => $contract->id,
+        ]); 
 
         return self::response($contract->toArray());
     }
